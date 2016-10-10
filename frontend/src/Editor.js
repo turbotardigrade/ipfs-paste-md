@@ -33,6 +33,10 @@ export class LiveEditor extends React.Component {
   onChange(event) {
     this.setState({input: event.target.value});
   };
+
+  getText() {
+    return this.state.input;
+  }
   
   render() {
     return (
@@ -57,11 +61,14 @@ export default class Editor extends React.Component {
   };
   
   save() {
-    var host = window.location.hostname;
+    var host = window.location.hostname+":"+window.location.port;
+    var text = this._liveEditor.getText();
+    console.log("Text:");
+    console.log(text);
     var config = {
       method: 'POST',
-      url: 'http://'+host+':3000/texts/',
-      body: JSON.stringify({Text: this.state.text}),
+      url: 'http://'+host+'/texts/',
+      body: JSON.stringify({Text: text}),
       json: true
     };
     
@@ -72,8 +79,8 @@ export default class Editor extends React.Component {
   };
   
   render() {
-    var host = window.location.hostname;
-    var url = 'http://'+host+':3001/view/' + this.state.hash;
+    var host = window.location.hostname+":"+window.location.port;
+    var url = 'http://'+host+'/view/' + this.state.hash;
     
     return (
       <div className="App">
@@ -91,7 +98,7 @@ export default class Editor extends React.Component {
 	  <div className="left">Saved as: <input value={this.state.hash} size="55" disabled /></div>
 	  <div className="right"><a href={url}>Open in viewer</a></div>
 	</div>
-	<LiveEditor text={this.state.text}></LiveEditor>
+	<LiveEditor ref={(ref) => this._liveEditor = ref} text={this.state.text}></LiveEditor>
       </div>
     )
   };
