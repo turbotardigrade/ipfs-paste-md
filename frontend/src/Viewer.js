@@ -25,9 +25,9 @@ export default class Viewer extends React.Component {
   }
   componentWillMount() {
     var hash = this.props.params.hash;
-    var host = window.location.hostname;
+    var host = window.location.hostname+":"+window.location.port;
 
-    request('http://'+host+':3000/texts/'+hash, function(err, _, body) {
+    request('http://'+host+'/texts/'+hash, function(err, _, body) {
       if(err) throw err;
       this.setState({input: body});
     }.bind(this));

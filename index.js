@@ -7,8 +7,6 @@ var express    = require('express');
 var bodyParser = require("body-parser");
 var app        = express();
 
-app.use(bodyParser.json());
-
 // for CORS
 app.use(function (req, res, next) {
 
@@ -28,6 +26,9 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+// for receiving json as post payload
+app.use(bodyParser.json());
 
 app.get('/texts/:hash', function (req, res) {
   var hash = req.params.hash;
@@ -67,6 +68,13 @@ app.post('/texts', function (req, res) {
     });
   });
 });
+
+// serve frontend
+app.use(express.static(__dirname + '/frontend/build'));
+app.get('*', function(req, res) {
+    res.sendFile(__dirname + '/frontend/build/index.html');
+});
+
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
