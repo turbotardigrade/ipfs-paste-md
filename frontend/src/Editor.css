@@ -1,0 +1,48 @@
+.cont {
+    display: flex;
+}
+
+.lefthalf {
+    flex: 1;
+    padding: 27px;	
+}
+
+.righthalf {
+    flex: 1;
+    padding: 27px;
+}
+
+.topbar {
+    background-color: #222;
+    text-align: right;
+    padding: 10px 10px 10px 40px;
+    color: white;
+}
+
+.infobar {
+    background-color: #eee;
+    text-align: right;
+    height: 20px;
+    padding: 10px;
+    color: black;
+    font-size: small;
+}
+
+.left {
+    float:left;
+}
+
+.right {
+    float:right;
+}
+
+.editor {
+    font-family: Courier;
+    font-size: large;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+}
+
+.hidden { display:none; }
